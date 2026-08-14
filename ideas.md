@@ -74,3 +74,9 @@ Sampel menggunakan format `[C]Kutatap dua [G]mata indahmu` sesuai SOP. Karena te
 - Copy publik menyapa gitaris sebagai rekan latihan; detail teknis implementasi tidak tampil dalam teks antarmuka.
 - Record homepage selalu menampilkan sinyal praktik kord atau status sesi; chart pihak ketiga diberi label sebagai data impor/referensi, sementara katalog lokal tetap menjadi cerita utama ChordNesia.
 - Oker `#D7A83F` digunakan sebagai indikator status aktif atau referensi sesi, tidak sebagai aksen dekoratif umum.
+
+## Referensi Visual RiffForge — Spesifikasi Ground Truth
+
+Referensi RiffForge yang disediakan pengguna menjadi acuan visual dan pengalaman utama untuk revisi ini. ChordNesia akan memakai kanvas warm off-white, surface putih, teks charcoal, border soft gray, serta **muted sage green** sebagai aksen aksi utama, chord aktif, dan status positif. Gaya baru mengutamakan kejelasan belajar gitar: kartu lagu dengan cover kecil dan bookmark, progression chord besar, chord card dengan diagram, kontrol latihan terpusat, serta CTA **Mulai latihan**.
+
+Desktop menggunakan header bersih, halaman detail dua kolom, dan hierarchy informasi yang ringan. Mobile memakai satu kolom, tombol yang dapat dijangkau satu tangan, dan bottom navigation fixed berisi Beranda, Jelajah, Latihan, serta Profil. Bentuk komponen menggunakan radius 12–16px, shadow halus, dan state hover/active yang terlihat melalui border atau sage green; visual bersifat terang, praktis, dan bebas ornamen yang tidak mendukung latihan.

@@ -54,3 +54,11 @@
 - [x] Menampilkan lirik API dalam area monospace bernomor yang dapat di-scroll.
 - [x] Memproses dan menyorot kord sebagai token klik-ke-diagram, termasuk state loading/error.
 - [x] Memverifikasi lirik, diagram, responsivitas, dan build produksi.
+
+## Penyelarasan RiffForge
+
+- [x] Merekam referensi RiffForge sebagai spesifikasi visual dan alur pengalaman utama.
+- [x] Mengganti fondasi warna, surface, tombol, search, dan Song Card ke sistem RiffForge.
+- [x] Menyelaraskan detail lagu dengan progression, chord card, bookmark, dan tombol Mulai latihan.
+- [x] Menambahkan bottom navigation mobile dan alur latihan yang terhubung.
+- [x] Memverifikasi desktop/mobile serta build produksi sesuai referensi.

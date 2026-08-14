@@ -1,0 +1,17 @@
+/* RiffForge / mode latihan: progression aktif, lirik fokus, dan kontrol inti agar pemain tidak kehilangan konteks. */
+import { Link } from "wouter";
+import { useState } from "react";
+import { ArrowLeft, Gauge, Pause, Play, Repeat2, RotateCcw, Timer, Volume2 } from "lucide-react";
+import { ChordDiagram } from "@/components/ChordDiagram";
+import { MobileBottomNav, SiteHeader } from "@/components/RiffForgeChrome";
+import { PROGRESSION, SONGS } from "@/lib/songs";
+
+export default function Practice() {
+  const song = SONGS[0];
+  const [activeChord, setActiveChord] = useState("C");
+  const [playing, setPlaying] = useState(false);
+  const [tempo, setTempo] = useState(84);
+  const [metronome, setMetronome] = useState(false);
+  const [autoScroll, setAutoScroll] = useState(true);
+  return <div className="riff-app practice-page"><SiteHeader /><main className="riff-page"><div className="riff-breadcrumb"><Link href={`/lagu/${song.slug}`}><ArrowLeft size={15} /> Song Detail</Link><span>/</span><strong>Latihan</strong></div><section className="practice-heading"><div><p className="eyebrow">MODE LATIHAN</p><h1>{song.title} <em>— Latihan</em></h1></div><Link className="secondary-button" href={`/lagu/${song.slug}`}>Kembali ke detail</Link></section><section className="practice-focus-card"><div className="practice-diagram"><h2>{activeChord} major</h2><ChordDiagram chord={activeChord} /></div><div className="practice-progressions"><span>CHORD PROGRESSION</span><div>{PROGRESSION.map((chord) => <button className={activeChord === chord ? "active" : ""} onClick={() => setActiveChord(chord)} key={chord}>{chord}</button>)}</div></div></section><section className="practice-lyric-stage"><p className="practice-active-chord">{activeChord}</p><h2>Loving can hurt, loving can hurt sometimes</h2><p>Ikuti perpindahan chord dan pertahankan ritme yang stabil.</p></section><section className="practice-controls"><button className="practice-play" onClick={() => setPlaying(!playing)}>{playing ? <Pause size={23} /> : <Play size={23} />}</button><div><span>{tempo} BPM</span><small>Tempo</small></div><button className={metronome ? "control-active" : ""} onClick={() => setMetronome(!metronome)}><Volume2 size={18} /><small>Metronome</small></button><button className={autoScroll ? "control-active" : ""} onClick={() => setAutoScroll(!autoScroll)}><Timer size={18} /><small>Auto-scroll</small></button><button><Repeat2 size={18} /><small>Ulangi bagian</small></button><div className="tempo-stepper"><button onClick={() => setTempo(Math.max(40, tempo - 2))}>−</button><button onClick={() => setTempo(Math.min(180, tempo + 2))}>+</button></div></section><div className="practice-progress"><div><span>Verse</span><span>1 / 4</span></div><i><b /></i></div><aside className="practice-tip"><Gauge size={19} /><p><strong>Tips latihan</strong>Dengarkan ritme, perhatikan perpindahan chord, lalu tingkatkan tempo sedikit demi sedikit.</p><RotateCcw size={17} /></aside></main><MobileBottomNav /></div>;
+}
