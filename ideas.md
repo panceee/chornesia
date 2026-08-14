@@ -72,3 +72,5 @@ Sampel menggunakan format `[C]Kutatap dua [G]mata indahmu` sesuai SOP. Karena te
 - Homepage mengadopsi rail indeks kiri, nomor accession kanan, dan rule lines panjang agar fungsi pencarian tetap terasa seperti penjelajahan arsip, bukan landing page terpusat.
 - Song Card diperlakukan sebagai record katalog dengan pemisah garis, nomor masuk, cap metadata, dan hover berbentuk perpindahan record, bukan kartu produk ber-radius.
 - Copy publik menyapa gitaris sebagai rekan latihan; detail teknis implementasi tidak tampil dalam teks antarmuka.
+- Record homepage selalu menampilkan sinyal praktik kord atau status sesi; chart pihak ketiga diberi label sebagai data impor/referensi, sementara katalog lokal tetap menjadi cerita utama ChordNesia.
+- Oker `#D7A83F` digunakan sebagai indikator status aktif atau referensi sesi, tidak sebagai aksen dekoratif umum.

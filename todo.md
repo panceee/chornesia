@@ -19,3 +19,10 @@
 - [x] Menyempurnakan search bar menjadi input dan tombol aksi eksplisit.
 - [x] Menambahkan CTA latihan dan merapikan perilaku mobile-first.
 - [x] Memverifikasi hero pada desktop/mobile serta build produksi.
+
+## Integrasi Trending API
+
+- [x] Menetapkan endpoint dan kontrak data lagu trending pada frontend statis.
+- [x] Mengambil dan menampilkan lagu trending sebagai grid/carousel.
+- [x] Menambahkan skeleton loader, error state, serta aksi coba lagi.
+- [x] Memverifikasi status sukses, loading, gagal, dan build produksi.
