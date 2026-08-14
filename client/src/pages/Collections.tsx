@@ -1,0 +1,13 @@
+/* RiffForge / koleksi: daftar lagu tersimpan dari local storage dengan filter genre dan tingkat kesulitan. */
+import { Bookmark, Heart, Search, Trash2 } from "lucide-react";
+import { useMemo, useState } from "react";
+import { Link } from "wouter";
+import { MobileBottomNav, SiteHeader } from "@/components/RiffForgeChrome";
+import { useFavorites } from "@/hooks/useFavorites";
+import { SONGS } from "@/lib/songs";
+
+export default function Collections() {
+  const { favorites, ready, removeFavorite } = useFavorites(); const [genre, setGenre] = useState("Semua"); const [difficulty, setDifficulty] = useState("Semua");
+  const songs = useMemo(() => SONGS.filter((song) => favorites.includes(song.slug) && (genre === "Semua" || song.genre === genre) && (difficulty === "Semua" || song.difficulty === difficulty)), [favorites, genre, difficulty]);
+  return <div className="riff-app collections-page"><SiteHeader /><main className="riff-page"><div className="collections-heading"><div><p className="eyebrow">KOLEKSI PRIBADI</p><h1>Lagu tersimpan.</h1><p>Simpan lagu untuk dibuka kembali ketika sesi latihan berikutnya dimulai.</p></div><div className="collection-count"><Heart size={18} fill="currentColor" /> {favorites.length}</div></div><div className="collection-filters"><select value={genre} onChange={(event) => setGenre(event.target.value)}><option>Semua</option>{Array.from(new Set(SONGS.map((song) => song.genre))).map((item) => <option key={item}>{item}</option>)}</select><select value={difficulty} onChange={(event) => setDifficulty(event.target.value)}><option>Semua</option>{["Mudah", "Menengah", "Sulit"].map((item) => <option key={item}>{item}</option>)}</select></div>{!ready ? <div className="collection-loading">Memuat koleksi…</div> : songs.length ? <div className="collections-list">{songs.map((song) => <article className="collection-row" key={song.slug}><div className={`song-cover ${song.cover}`}><span>{song.key}</span></div><Link href={`/lagu/${song.slug}`}><h2>{song.title}</h2><p>{song.artist} · {song.genre} · {song.difficulty}</p></Link><button onClick={() => removeFavorite(song.slug)} aria-label={`Hapus ${song.title} dari koleksi`}><Trash2 size={17} /> Hapus</button></article>)}</div> : <div className="collection-empty"><Bookmark size={30} /><h2>{favorites.length ? "Tidak ada lagu sesuai filter" : "Koleksimu masih kosong"}</h2><p>{favorites.length ? "Ubah filter untuk melihat lagu tersimpan lainnya." : "Gunakan tombol bookmark pada kartu lagu atau halaman detail untuk menyimpan lagu."}</p><Link className="primary-button" href="/#explore"><Search size={15} /> Jelajahi lagu</Link></div>}</main><MobileBottomNav /></div>;
+}

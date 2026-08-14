@@ -69,3 +69,18 @@
 - [x] Menampilkan kord yang dapat diklik tepat di atas kata/lirik terkait.
 - [x] Menambahkan preview kode format `[Chord]Lirik` pada detail lagu.
 - [x] Memverifikasi tampilan desktop/mobile dan build produksi.
+
+## Preset Transpose
+
+- [x] Menampilkan nilai transpose aktif dalam satuan semitone.
+- [x] Menambahkan tombol penyesuaian −/+ satu semitone.
+- [x] Menambahkan preset cepat −5, −2, −1, +1, +2, dan +5.
+- [x] Memverifikasi responsivitas serta build produksi kontrol transpose.
+
+## Roadmap Latihan Lanjutan
+
+- [x] Memindahkan auto-scroll ke viewport lirik dan menambahkan slider 0,5×–2×.
+- [x] Mengganti diagram kord menjadi SVG berbasis data dengan indikator open/mute dan posisi jari.
+- [x] Menyimpan favorit pada local storage dan menambahkan halaman Koleksi.
+- [x] Menambahkan pemisahan route ringan, state loading/error yang konsisten, dan pengujian responsif.
+- [x] Memverifikasi seluruh alur latihan pada desktop/mobile serta build produksi.
