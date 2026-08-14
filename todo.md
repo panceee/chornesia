@@ -47,3 +47,10 @@
 - [x] Melengkapi metadata judul, artis, genre, kesulitan, dan tahun rilis.
 - [x] Menata ulang area detail menjadi dua kolom lirik dan kontrol bermain.
 - [x] Memverifikasi responsivitas dan build produksi halaman detail.
+
+## Lirik API & Kord Interaktif
+
+- [x] Menetapkan endpoint lirik dan fallback data untuk MVP statis.
+- [x] Menampilkan lirik API dalam area monospace bernomor yang dapat di-scroll.
+- [x] Memproses dan menyorot kord sebagai token klik-ke-diagram, termasuk state loading/error.
+- [x] Memverifikasi lirik, diagram, responsivitas, dan build produksi.
