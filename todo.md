@@ -33,3 +33,10 @@
 - [x] Membuat filter sebagai toggle interaktif dan menyiapkan parameter API opsional.
 - [x] Menambahkan blok branding serta tautan About, Contact, dan informasi pendukung.
 - [x] Memverifikasi responsivitas filter, tautan, dan build produksi.
+
+## SearchBar & Hasil Pencarian
+
+- [x] Membuat komponen SearchBar dengan debounce 300ms.
+- [x] Menampilkan hasil real-time dalam grid dengan highlight kecocokan dan tautan detail lagu.
+- [x] Menambahkan empty state, pagination, dan responsivitas hasil pencarian.
+- [x] Memverifikasi perilaku pencarian serta build produksi.
