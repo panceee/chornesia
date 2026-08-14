@@ -26,3 +26,10 @@
 - [x] Mengambil dan menampilkan lagu trending sebagai grid/carousel.
 - [x] Menambahkan skeleton loader, error state, serta aksi coba lagi.
 - [x] Memverifikasi status sukses, loading, gagal, dan build produksi.
+
+## Filter & Identitas Katalog
+
+- [x] Menambahkan 8 filter genre dan 3 filter tingkat kesulitan.
+- [x] Membuat filter sebagai toggle interaktif dan menyiapkan parameter API opsional.
+- [x] Menambahkan blok branding serta tautan About, Contact, dan informasi pendukung.
+- [x] Memverifikasi responsivitas filter, tautan, dan build produksi.
