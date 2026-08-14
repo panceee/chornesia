@@ -84,3 +84,10 @@
 - [x] Menyimpan favorit pada local storage dan menambahkan halaman Koleksi.
 - [x] Menambahkan pemisahan route ringan, state loading/error yang konsisten, dan pengujian responsif.
 - [x] Memverifikasi seluruh alur latihan pada desktop/mobile serta build produksi.
+
+## Dark Mode Latihan Malam
+
+- [x] Menetapkan token surface, teks, border, dan sage untuk mode malam.
+- [x] Menambahkan toggle mode malam serta menyimpan preferensi pada perangkat.
+- [x] Menyelaraskan detail lagu, mode latihan, lirik, diagram, dan kontrol dalam dark mode.
+- [x] Memverifikasi dark mode desktop/mobile, build produksi, dan push ke GitHub.
