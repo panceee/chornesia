@@ -1,149 +1,81 @@
-/* ChordNesia / Arsip Nada Editorial: rail metadata, lirik monospace, kord brick-red, kontrol seperti tape deck. */
-import { useEffect, useMemo, useRef, useState } from "react";
-import { ArrowDown, ArrowUp, ChevronDown, CirclePlay, Gauge, Moon, Pause, Play, Search, Sun, Volume2, X } from "lucide-react";
+/* ChordNesia / Arsip Nada Editorial: katalog lagu asimetris, tipografi editorial, aksen brick-red sebagai indeks musik. */
+import { Link } from "wouter";
+import { ArrowDownRight, ChevronDown, Moon, Search, SlidersHorizontal, Sun } from "lucide-react";
+import { useMemo, useState } from "react";
 
-const song = {
-  title: "Sampel Lagu — Mata Indahmu",
-  artist: "ChordNesia Session",
-  key: "C",
-  difficulty: "Pemula",
-  genre: "Pop akustik",
-  tempo: 92,
-  pattern: ["D", "D", "U", "U", "D", "U"],
-  lines: [
-    "[C]Kutatap dua [G]mata indahmu",
-    "[Am]Di bawah langit [F]yang biru",
-    "[C]Satu petikan, [G]satu cerita",
-    "[Am]Kita nyanyikan [F]bersama",
-    "",
-    "[F]Tak perlu banyak [C]kata",
-    "[G]Biarkan nada [Am]bicara",
-    "[F]Pelan-pelan kita [C]menemukan",
-    "[G]Rumah di dalam [C]lagu ini",
-  ],
-};
+const songs = [
+  { slug: "mata-indahmu", title: "Mata Indahmu", artist: "ChordNesia Session", key: "C", genre: "Pop akustik", difficulty: "Pemula", minutes: "03:42", featured: true },
+  { slug: "pulang-pelan", title: "Pulang Pelan", artist: "Ruang Senja", key: "G", genre: "Folk", difficulty: "Menengah", minutes: "04:12", featured: false },
+  { slug: "bertemu-lagi", title: "Bertemu Lagi", artist: "Pagi Hari", key: "D", genre: "Pop", difficulty: "Pemula", minutes: "03:18", featured: false },
+  { slug: "dalam-satu-lagu", title: "Dalam Satu Lagu", artist: "Kamar Tiga", key: "Am", genre: "Indie", difficulty: "Menengah", minutes: "04:01", featured: false },
+  { slug: "ruang-tenang", title: "Ruang Tenang", artist: "Titik Temu", key: "E", genre: "Folk", difficulty: "Lanjutan", minutes: "05:03", featured: false },
+];
 
-const chromatic = ["C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"];
-const chordShapes: Record<string, string[]> = {
-  C: ["x", "3", "2", "0", "1", "0"],
-  G: ["3", "2", "0", "0", "0", "3"],
-  Am: ["x", "0", "2", "2", "1", "0"],
-  F: ["1", "3", "3", "2", "1", "1"],
-};
-
-function shiftChord(chord: string, steps: number) {
-  const match = chord.match(/^([A-G](?:#|b)?)(.*)$/);
-  if (!match) return chord;
-  const root = match[1].replace("Db", "C#").replace("Eb", "D#").replace("Gb", "F#").replace("Ab", "G#").replace("Bb", "A#");
-  const index = chromatic.indexOf(root);
-  if (index < 0) return chord;
-  return `${chromatic[(index + steps + chromatic.length) % chromatic.length]}${match[2]}`;
-}
-
-function parseLine(line: string, transpose: number) {
-  const parts = line.split(/(\[[^\]]+\])/g).filter(Boolean);
-  return parts.map((part, index) => {
-    const chordMatch = part.match(/^\[([^\]]+)\]$/);
-    if (chordMatch) {
-      const value = shiftChord(chordMatch[1], transpose);
-      return <button className="chord-token" key={`${value}-${index}`} onClick={() => window.dispatchEvent(new CustomEvent("show-chord", { detail: value }))}>{value}</button>;
-    }
-    return <span key={`${part}-${index}`}>{part}</span>;
-  });
-}
+const filters = ["Semua", "Pemula", "Menengah", "Lanjutan"];
 
 export default function Home() {
-  const [transpose, setTranspose] = useState(0);
-  const [speed, setSpeed] = useState(1);
-  const [isScrolling, setIsScrolling] = useState(false);
+  const [query, setQuery] = useState("");
+  const [activeFilter, setActiveFilter] = useState("Semua");
   const [isDark, setIsDark] = useState(false);
-  const [selectedChord, setSelectedChord] = useState("C");
-  const [search, setSearch] = useState("");
-  const [showSearch, setShowSearch] = useState(false);
-  const scrollTimer = useRef<number | null>(null);
+  const visibleSongs = useMemo(() => songs.filter((song) => {
+    const matchesQuery = `${song.title} ${song.artist} ${song.genre}`.toLowerCase().includes(query.toLowerCase());
+    const matchesFilter = activeFilter === "Semua" || song.difficulty === activeFilter;
+    return matchesQuery && matchesFilter;
+  }), [query, activeFilter]);
 
-  useEffect(() => {
-    const handler = (event: Event) => setSelectedChord((event as CustomEvent<string>).detail);
-    window.addEventListener("show-chord", handler);
-    return () => window.removeEventListener("show-chord", handler);
-  }, []);
-
-  useEffect(() => {
-    document.documentElement.classList.toggle("chordnesia-dark", isDark);
-    return () => document.documentElement.classList.remove("chordnesia-dark");
-  }, [isDark]);
-
-  useEffect(() => {
-    if (scrollTimer.current) window.clearInterval(scrollTimer.current);
-    if (isScrolling) {
-      scrollTimer.current = window.setInterval(() => window.scrollBy({ top: speed, behavior: "auto" }), 48);
-    }
-    return () => { if (scrollTimer.current) window.clearInterval(scrollTimer.current); };
-  }, [isScrolling, speed]);
-
-  const renderedLines = useMemo(() => song.lines.filter((line) => !search || line.toLowerCase().includes(search.toLowerCase())), [search]);
-  const displayKey = shiftChord(song.key, transpose);
-  const shape = chordShapes[selectedChord.replace(/#|b/g, "")] || ["x", "0", "2", "2", "1", "0"];
+  const setTheme = () => {
+    const next = !isDark;
+    setIsDark(next);
+    document.documentElement.classList.toggle("chordnesia-dark", next);
+  };
 
   return (
-    <div className="app-shell">
+    <div className="app-shell home-shell">
       <header className="site-header">
-        <a className="brand" href="#top" aria-label="ChordNesia beranda">
+        <Link className="brand" href="/" aria-label="ChordNesia beranda">
           <img src="/manus-storage/chordnesia-mark_5da2b96b.png" alt="" className="brand-mark" />
-          <span><strong>Chord</strong>Nesia</span>
-        </a>
-        <div className="header-actions">
-          <button className="icon-button" aria-label="Cari lagu" onClick={() => setShowSearch(!showSearch)}><Search size={18} /></button>
-          <button className="icon-button" aria-label="Ganti tema" onClick={() => setIsDark(!isDark)}>{isDark ? <Sun size={18} /> : <Moon size={18} />}</button>
-          <button className="library-link">Koleksi <ChevronDown size={15} /></button>
-        </div>
+          <span className="brand-word"><i>Chord</i><b>Nesia</b></span>
+        </Link>
+        <nav className="header-actions" aria-label="Navigasi utama">
+          <a className="library-link active-nav" href="#katalog">Katalog</a>
+          <a className="library-link" href="#tentang">Tentang</a>
+          <button className="icon-button" aria-label="Ganti tema" onClick={setTheme}>{isDark ? <Sun size={18} /> : <Moon size={18} />}</button>
+        </nav>
       </header>
 
-      {showSearch && <div className="search-drawer"><Search size={17} /><input autoFocus placeholder="Cari judul atau artis..." value={search} onChange={(event) => setSearch(event.target.value)} /><button onClick={() => { setSearch(""); setShowSearch(false); }} aria-label="Tutup pencarian"><X size={17} /></button></div>}
-
-      <main id="top" className="page-frame">
-        <aside className="meta-rail">
-          <p className="eyebrow">LAGU / 001</p>
-          <div className="rail-rule" />
-          <dl className="metadata">
-            <div><dt>ARTIS</dt><dd>{song.artist}</dd></div>
-            <div><dt>GENRE</dt><dd>{song.genre}</dd></div>
-            <div><dt>KESULITAN</dt><dd><span className="level-dot" /> {song.difficulty}</dd></div>
-            <div><dt>NADA ASLI</dt><dd>{song.key} major</dd></div>
-          </dl>
-          <div className="rail-note"><Volume2 size={16} /><span>Tekan kord<br />untuk melihat bentuk.</span></div>
-        </aside>
-
-        <section className="song-column">
-          <div className="song-heading">
-            <div><p className="eyebrow accent">ARSIP NADA · SESI LATIHAN</p><h1>{song.title}</h1><p className="subtitle">Sampel data awal · format kord siap dihubungkan ke CPT Lagu + ACF.</p></div>
-            <div className="heading-key"><span>KEY SEKARANG</span><strong>{displayKey}</strong></div>
+      <main>
+        <section className="home-hero">
+          <div className="hero-copy">
+            <p className="eyebrow accent">CHORDNESIA / ARSIP KORD GITAR</p>
+            <h1>Buka lagu.<br /><em>Petik</em> bagian<br />favoritmu.</h1>
+            <p className="hero-intro">Koleksi kord gitar yang disusun untuk dibaca cepat, dimainkan nyaman, dan dipindahkan nadanya tanpa memutus alur.</p>
+            <a href="#katalog" className="hero-link">Jelajahi katalog <ArrowDownRight size={20} /></a>
           </div>
-
-          <div className="strum-card">
-            <div className="strum-label"><span>POLA GENJRENGAN</span><small>4/4 · {song.tempo} BPM</small></div>
-            <div className="strum-pattern">{song.pattern.map((stroke, index) => <span key={`${stroke}-${index}`} className={stroke === "D" ? "down" : "up"}>{stroke === "D" ? <ArrowDown size={16} /> : <ArrowUp size={16} />}<b>{stroke}</b></span>)}</div>
-            <div className="strum-count">1 &nbsp; + &nbsp; 2 &nbsp; + &nbsp; 3 &nbsp; + &nbsp; 4 &nbsp; +</div>
-          </div>
-
-          <div className="song-body">
-            <div className="line-index">01<br />02<br />03<br />04<br /><br />06<br />07<br />08<br />09</div>
-            <div className="lyrics" aria-label="Lirik dan kord lagu">{renderedLines.map((line, index) => <div className={line ? "lyric-line" : "lyric-line spacer"} key={`${line}-${index}`}>{line ? parseLine(line, transpose) : ""}</div>)}</div>
-          </div>
-
-          <div className="sample-note"><CirclePlay size={16} /><span>Ini adalah cuplikan sampel. Tempelkan isi lagu dengan format <code>[C]Teks lirik</code> untuk menambah lagu berikutnya.</span></div>
+          <div className="hero-art" role="img" aria-label="Gitar akustik dan arsip notasi musik"><div className="plate-index">PLATE / 01<br />CAT. CN–A01</div><div className="hero-serial">VOL. 01<br />PLAY / READ</div></div>
         </section>
 
-        <aside className="play-rail">
-          <div className="sticky-controls">
-            <div className="control-block"><p className="eyebrow">TRANSPOSE</p><div className="transpose-control"><button onClick={() => setTranspose(transpose - 1)} aria-label="Turunkan nada"><span>−</span></button><strong>{transpose > 0 ? `+${transpose}` : transpose}</strong><button onClick={() => setTranspose(transpose + 1)} aria-label="Naikkan nada"><span>+</span></button></div><small>{displayKey} · {transpose === 0 ? "asli" : `${Math.abs(transpose)} semitone`}</small></div>
-            <div className="control-block scroll-block"><div className="control-title"><p className="eyebrow">AUTO-SCROLL</p><Gauge size={17} /></div><div className="speed-row"><button onClick={() => setSpeed(Math.max(1, speed - 1))}>−</button><span>{speed}×</span><button onClick={() => setSpeed(Math.min(4, speed + 1))}>+</button></div><button className={`scroll-button ${isScrolling ? "active" : ""}`} onClick={() => setIsScrolling(!isScrolling)}>{isScrolling ? <Pause size={16} /> : <Play size={16} />}{isScrolling ? "Jeda scroll" : "Mulai scroll"}</button></div>
-            <div className="tip-card"><span className="tip-number">01</span><p><strong>Tips sesi</strong><br />Atur kecepatan ke 1× saat pertama membaca progresi.</p></div>
+        <section id="katalog" className="catalog-section">
+          <div className="catalog-heading"><div><p className="eyebrow">KATALOG LAGU / FILE INDEX 01</p><h2>Temukan progresi<br />yang ingin kamu mainkan.</h2></div><p className="catalog-count"><strong>{visibleSongs.length.toString().padStart(2, "0")}</strong> lagu terpilih<br />untuk sesi ini</p></div>
+          <div className="catalog-tools">
+            <label className="catalog-search"><Search size={18} /><input placeholder="Cari judul, artis, atau genre" value={query} onChange={(event) => setQuery(event.target.value)} /></label>
+            <div className="filter-row" aria-label="Filter tingkat kesulitan"><SlidersHorizontal size={16} />{filters.map((filter) => <button key={filter} className={activeFilter === filter ? "filter-button active" : "filter-button"} onClick={() => setActiveFilter(filter)}>{filter}</button>)}</div>
           </div>
-        </aside>
-      </main>
+          <div className="song-list">
+            {visibleSongs.map((song, index) => <Link href={`/lagu/${song.slug}`} className="song-row" key={song.slug}>
+              <span className="song-number">{(index + 1).toString().padStart(2, "0")}</span>
+              <div className="song-title"><strong>{song.title}</strong><span>{song.artist}</span></div>
+              <span className="song-genre">{song.genre}</span>
+              <span className="song-key">{song.key}</span>
+              <span className="song-level"><i className={`level-mark ${song.difficulty.toLowerCase()}`} />{song.difficulty}</span>
+              <span className="song-time">{song.minutes}</span>
+              <ArrowDownRight className="song-arrow" size={19} />
+            </Link>)}
+            {!visibleSongs.length && <div className="empty-catalog">Tidak ada lagu yang cocok. Coba kata kunci atau tingkat kesulitan lain.</div>}
+          </div>
+        </section>
 
-      {selectedChord && <div className="chord-popover"><div className="popover-top"><span>DIAGRAM KORD</span><button onClick={() => setSelectedChord("")} aria-label="Tutup diagram"><X size={15} /></button></div><strong>{selectedChord}</strong><div className="fretboard" aria-label={`Diagram kord ${selectedChord}`}>{Array.from({ length: 6 }).map((_, stringIndex) => <div className="string-line" key={stringIndex}>{Array.from({ length: 5 }).map((_, fretIndex) => <span className={fretIndex === 1 && shape[stringIndex] !== "x" && shape[stringIndex] !== "0" ? "finger" : ""} key={fretIndex}>{fretIndex === 0 ? shape[stringIndex] : ""}</span>)}</div>)}</div><small>Senar 6 → 1 · klik kord lain untuk mengganti</small></div>}
+        <section id="tentang" className="home-note"><span>CHORDNESIA</span><p><strong>Format yang rapi.</strong> Kord selalu berada di atas lirik, siap untuk transpose dan sesi scroll tanpa distraksi.</p><ChevronDown size={18} /></section>
+      </main>
     </div>
   );
 }

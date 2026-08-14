@@ -63,3 +63,9 @@ Merah bata `#B84C3A`, warna penanda kord dan aksi ChordNesia yang terasa analog,
 ## Sampel Data Awal
 
 Sampel menggunakan format `[C]Kutatap dua [G]mata indahmu` sesuai SOP. Karena teks lagu lengkap belum tersedia di konteks proyek ini, implementasi awal memakai cuplikan pendek yang jelas ditandai sebagai sampel dan siap diganti dengan data CPT/ACF WordPress.
+
+## Style Decisions
+
+- Wordmark menggunakan mark pick geometris bersama pasangan `DM Serif Display` untuk “Chord” dan `Roboto Mono` brick-red untuk “Nesia”; identitas tidak memakai bold UI default.
+- Foto gitar diperlakukan sebagai pelat arsip: dibingkai, diberi kode plate dan katalog, serta penanda vertikal alih-alih gaya foto lifestyle.
+- Brick red `#B84C3A` dipertahankan hanya untuk aksi primer, token kord, state musik aktif, dan identitas brand; oker `#D7A83F` hanya untuk status, tempo, serta tingkat kesulitan.
