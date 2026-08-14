@@ -69,3 +69,6 @@ Sampel menggunakan format `[C]Kutatap dua [G]mata indahmu` sesuai SOP. Karena te
 - Wordmark menggunakan mark pick geometris bersama pasangan `DM Serif Display` untuk “Chord” dan `Roboto Mono` brick-red untuk “Nesia”; identitas tidak memakai bold UI default.
 - Foto gitar diperlakukan sebagai pelat arsip: dibingkai, diberi kode plate dan katalog, serta penanda vertikal alih-alih gaya foto lifestyle.
 - Brick red `#B84C3A` dipertahankan hanya untuk aksi primer, token kord, state musik aktif, dan identitas brand; oker `#D7A83F` hanya untuk status, tempo, serta tingkat kesulitan.
+- Homepage mengadopsi rail indeks kiri, nomor accession kanan, dan rule lines panjang agar fungsi pencarian tetap terasa seperti penjelajahan arsip, bukan landing page terpusat.
+- Song Card diperlakukan sebagai record katalog dengan pemisah garis, nomor masuk, cap metadata, dan hover berbentuk perpindahan record, bukan kartu produk ber-radius.
+- Copy publik menyapa gitaris sebagai rekan latihan; detail teknis implementasi tidak tampil dalam teks antarmuka.

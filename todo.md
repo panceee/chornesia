@@ -4,3 +4,11 @@
 - [x] Membangun home page dengan pencarian, filter, kartu lagu, dan tautan ke detail.
 - [x] Memindahkan pengalaman transpose, auto-scroll, dan diagram kord ke detail page.
 - [x] Memverifikasi tampilan desktop/mobile serta build produksi.
+
+## Revisi Homepage & Mobile Controls
+
+- [x] Menerapkan hero pencarian utama dan quick filter badges pada homepage.
+- [x] Menyusun grid Song Card dengan metadata genre, kesulitan, key, dan interaksi hover.
+- [x] Menambahkan bagian “Baru Ditambahkan” serta navigasi utama yang lengkap.
+- [x] Membuat floating bottom bar mobile untuk transpose, auto-scroll, dan perubahan tema pada detail lagu.
+- [x] Menguji desktop/mobile dan build produksi untuk seluruh revisi.
