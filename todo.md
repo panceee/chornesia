@@ -12,3 +12,10 @@
 - [x] Menambahkan bagian “Baru Ditambahkan” serta navigasi utama yang lengkap.
 - [x] Membuat floating bottom bar mobile untuk transpose, auto-scroll, dan perubahan tema pada detail lagu.
 - [x] Menguji desktop/mobile dan build produksi untuk seluruh revisi.
+
+## Penyempurnaan Hero
+
+- [x] Menambahkan lapisan gradien yang selaras dengan identitas arsip ChordNesia.
+- [x] Menyempurnakan search bar menjadi input dan tombol aksi eksplisit.
+- [x] Menambahkan CTA latihan dan merapikan perilaku mobile-first.
+- [x] Memverifikasi hero pada desktop/mobile serta build produksi.
