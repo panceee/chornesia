@@ -62,3 +62,10 @@
 - [x] Menyelaraskan detail lagu dengan progression, chord card, bookmark, dan tombol Mulai latihan.
 - [x] Menambahkan bottom navigation mobile dan alur latihan yang terhubung.
 - [x] Memverifikasi desktop/mobile serta build produksi sesuai referensi.
+
+## Kord di Atas Lirik
+
+- [x] Mengubah parser menjadi representasi baris kord dan baris lirik yang terpisah.
+- [x] Menampilkan kord yang dapat diklik tepat di atas kata/lirik terkait.
+- [x] Menambahkan preview kode format `[Chord]Lirik` pada detail lagu.
+- [x] Memverifikasi tampilan desktop/mobile dan build produksi.
