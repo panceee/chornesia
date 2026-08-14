@@ -1,10 +1,11 @@
-/* RiffForge / chrome aplikasi: navigasi desktop dan mobile dengan akses langsung ke Koleksi. */
-import { Compass, Guitar, Heart, Home, Search, UserRound } from "lucide-react";
+/* RiffForge / chrome aplikasi: navigasi dan toggle tema global yang tersedia pada setiap halaman. */
+import { Compass, Guitar, Heart, Home, Moon, Search, Sun, UserRound } from "lucide-react";
 import { Link, useLocation } from "wouter";
+import { useTheme } from "@/contexts/ThemeContext";
 
 export function SiteHeader() {
-  const [location] = useLocation();
-  return <header className="riff-header"><Link className="riff-brand" href="/"><span className="riff-mark">♬</span><strong>ChordNesia</strong></Link><nav className="riff-desktop-nav"><Link className={location === "/" ? "active" : ""} href="/">Beranda</Link><a href="/#explore">Jelajah</a><Link className={location === "/collections" ? "active" : ""} href="/collections"><Heart size={15} /> Favorit</Link></nav><Link className="header-search-link" href="/#search"><Search size={16} /><span>Cari lagu atau artis</span></Link><button className="profile-button" aria-label="Buka profil"><UserRound size={18} /></button></header>;
+  const [location] = useLocation(); const { theme, toggleTheme } = useTheme();
+  return <header className="riff-header"><Link className="riff-brand" href="/"><span className="riff-mark">♬</span><strong>ChordNesia</strong></Link><nav className="riff-desktop-nav"><Link className={location === "/" ? "active" : ""} href="/">Beranda</Link><a href="/#explore">Jelajah</a><Link className={location === "/collections" ? "active" : ""} href="/collections"><Heart size={15} /> Favorit</Link></nav><Link className="header-search-link" href="/#search"><Search size={16} /><span>Cari lagu atau artis</span></Link><div className="header-utilities"><button className={theme === "dark" ? "global-theme-toggle active" : "global-theme-toggle"} onClick={toggleTheme} aria-label={theme === "dark" ? "Aktifkan mode terang" : "Aktifkan mode malam"} title={theme === "dark" ? "Mode terang" : "Mode malam"}>{theme === "dark" ? <Sun size={16} /> : <Moon size={16} />}<span>{theme === "dark" ? "Terang" : "Malam"}</span></button><button className="profile-button" aria-label="Buka profil"><UserRound size={18} /></button></div></header>;
 }
 
 export function MobileBottomNav() {

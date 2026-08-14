@@ -91,3 +91,10 @@
 - [x] Menambahkan toggle mode malam serta menyimpan preferensi pada perangkat.
 - [x] Menyelaraskan detail lagu, mode latihan, lirik, diagram, dan kontrol dalam dark mode.
 - [x] Memverifikasi dark mode desktop/mobile, build produksi, dan push ke GitHub.
+
+## Dark Mode Global
+
+- [x] Menempatkan toggle tema pada header aplikasi untuk seluruh halaman.
+- [x] Menghapus toggle khusus latihan agar hanya ada satu sumber pengaturan tema.
+- [x] Memastikan dark mode mencakup Home, Detail Lagu, Latihan, Koleksi, dan navigasi mobile.
+- [x] Memverifikasi responsivitas dan build produksi tema global.
