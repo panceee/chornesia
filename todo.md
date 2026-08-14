@@ -40,3 +40,10 @@
 - [x] Menampilkan hasil real-time dalam grid dengan highlight kecocokan dan tautan detail lagu.
 - [x] Menambahkan empty state, pagination, dan responsivitas hasil pencarian.
 - [x] Memverifikasi perilaku pencarian serta build produksi.
+
+## Penyempurnaan Detail Lagu
+
+- [x] Menambahkan header detail dengan tombol kembali yang jelas.
+- [x] Melengkapi metadata judul, artis, genre, kesulitan, dan tahun rilis.
+- [x] Menata ulang area detail menjadi dua kolom lirik dan kontrol bermain.
+- [x] Memverifikasi responsivitas dan build produksi halaman detail.
